@@ -20,59 +20,84 @@ const CreateEvent = () => {
         onSubmit: (values, { resetForm }) => {
             localStorageService.addEvent(values);
             resetForm();
-            alert('Event created successfully');
+            alert('Event created successfully!');
         },
     });
 
     return (
-        <form onSubmit={formik.handleSubmit} className="p-4">
-            <div>
-                <label>Event Name</label>
-                <input
-                    type="text"
-                    name="name"
-                    value={formik.values.name}
-                    onChange={formik.handleChange}
-                    className="border"
-                />
-                {formik.errors.name && <p>{formik.errors.name}</p>}
-            </div>
-            <div>
-                <label>Date</label>
-                <input
-                    type="date"
-                    name="date"
-                    value={formik.values.date}
-                    onChange={formik.handleChange}
-                    className="border"
-                />
-                {formik.errors.date && <p>{formik.errors.date}</p>}
-            </div>
-            <div>
-                <label>Location</label>
-                <input
-                    type="text"
-                    name="location"
-                    value={formik.values.location}
-                    onChange={formik.handleChange}
-                    className="border"
-                />
-                {formik.errors.location && <p>{formik.errors.location}</p>}
-            </div>
-            <div>
-                <label>Description</label>
-                <textarea
-                    name="description"
-                    value={formik.values.description}
-                    onChange={formik.handleChange}
-                    className="border"
-                />
-                {formik.errors.description && <p>{formik.errors.description}</p>}
-            </div>
-            <button type="submit" className="bg-blue-500 text-white p-2 mt-4">
-                Create Event
-            </button>
-        </form>
+        <div className="max-w-xl mx-auto p-6 mt-10 bg-white shadow-md rounded-md">
+            <h1 className="text-2xl font-bold mb-6 text-center">Create a New Event</h1>
+            <form onSubmit={formik.handleSubmit} className="space-y-4">
+                <div>
+                    <label className="block text-gray-700 font-bold mb-2">Event Name</label>
+                    <input
+                        type="text"
+                        name="name"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.name}
+                        className={`border p-2 rounded w-full ${formik.touched.name && formik.errors.name ? 'border-red-500' : 'border-gray-300'}`}
+                        placeholder="Enter event name"
+                    />
+                    {formik.touched.name && formik.errors.name ? (
+                        <div className="text-red-500 text-sm mt-1">{formik.errors.name}</div>
+                    ) : null}
+                </div>
+
+                <div>
+                    <label className="block text-gray-700 font-bold mb-2">Date</label>
+                    <input
+                        type="date"
+                        name="date"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.date}
+                        className={`border p-2 rounded w-full ${formik.touched.date && formik.errors.date ? 'border-red-500' : 'border-gray-300'}`}
+                    />
+                    {formik.touched.date && formik.errors.date ? (
+                        <div className="text-red-500 text-sm mt-1">{formik.errors.date}</div>
+                    ) : null}
+                </div>
+
+                <div>
+                    <label className="block text-gray-700 font-bold mb-2">Location</label>
+                    <input
+                        type="text"
+                        name="location"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.location}
+                        className={`border p-2 rounded w-full ${formik.touched.location && formik.errors.location ? 'border-red-500' : 'border-gray-300'}`}
+                        placeholder="Enter event location"
+                    />
+                    {formik.touched.location && formik.errors.location ? (
+                        <div className="text-red-500 text-sm mt-1">{formik.errors.location}</div>
+                    ) : null}
+                </div>
+
+                <div>
+                    <label className="block text-gray-700 font-bold mb-2">Description</label>
+                    <textarea
+                        name="description"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.description}
+                        className={`border p-2 rounded w-full ${formik.touched.description && formik.errors.description ? 'border-red-500' : 'border-gray-300'}`}
+                        placeholder="Enter event description"
+                    />
+                    {formik.touched.description && formik.errors.description ? (
+                        <div className="text-red-500 text-sm mt-1">{formik.errors.description}</div>
+                    ) : null}
+                </div>
+
+                <button
+                    type="submit"
+                    className="bg-blue-500 text-white p-2 rounded w-full hover:bg-blue-600 transition"
+                >
+                    Create Event
+                </button>
+            </form>
+        </div>
     );
 };
 
