@@ -17,7 +17,6 @@ const EventRegistration = () => {
             return;
         }
 
-        const registrations = localStorageService.getRegistrations();
         const newRegistration = {
             eventId: event.id,
             name,
